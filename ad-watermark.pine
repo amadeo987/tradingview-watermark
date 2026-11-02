@@ -1,9 +1,9 @@
-// [ad] Watermark v1.2
+//@version=6
+// [ad] Watermark v1.3
 // Fixed text watermark for chart screenshots (e.g. a social media handle or a short tagline).
 // The text is anchored to the screen and shows on every symbol and timeframe.
 
-//@version=6
-indicator("[ad] Watermark v1.2", shorttitle = "Watermark", overlay = true)
+indicator("[ad] Watermark v1.3", shorttitle = "[ad] WM", overlay = true)
 
 // ==================== CONSTANTS ====================
 // Font names are written in their own style so the dropdown previews the look.
@@ -50,13 +50,13 @@ string groupMain = "Main text"
 string groupSecond = "Second line"
 string groupPosition = "Position"
 
-string mainTextInput = input.string("IG: @nickname", "Text", group = groupMain, tooltip = "What to show on the chart. Emoji are supported.", display = display.none)
+string mainTextInput = input.string("IG: @nickname", "IG nickname / text", group = groupMain, tooltip = "Enter your handle or any watermark text, e.g. IG: @nickname. Emoji are supported.", display = display.none)
 string mainFontInput = input.string(FONT_SYSTEM, "Font", options = [FONT_SYSTEM, FONT_MONO, FONT_SERIF, FONT_SERIF_ITALIC, FONT_SANS, FONT_SANS_ITALIC, FONT_SCRIPT, FONT_FRAKTUR, FONT_DOUBLE_STRUCK], group = groupMain, tooltip = "System uses the TradingView interface font of your device. Decorative styles are Unicode letters: they convert A–Z, a–z and 0–9, while accented letters, emoji and punctuation stay in the system font.", display = display.none)
 bool mainBoldInput = input.bool(true, "Bold", inline = "mainFormat", group = groupMain, display = display.none)
 bool mainItalicInput = input.bool(false, "Italic", inline = "mainFormat", group = groupMain, display = display.none)
 string mainLineInput = input.string(LINE_NONE, "Line", options = [LINE_NONE, LINE_UNDERLINE, LINE_STRIKETHROUGH], group = groupMain, display = display.none)
 int mainSizeInput = input.int(14, "Size (pt)", minval = 8, maxval = 120, inline = "mainLook", group = groupMain, display = display.none)
-color mainColorInput = input.color(color.new(#434651, 25), "Color", inline = "mainLook", group = groupMain, tooltip = "Set transparency with the slider in the color picker.", display = display.none)
+color mainColorInput = input.color(color.new(#D1D5DB, 25), "Text color", inline = "mainLook", group = groupMain, tooltip = "Light grey is readable on dark charts. Adjust the color and transparency to match your chart background.", display = display.none)
 
 string secondTextInput = input.string("", "Text", group = groupSecond, tooltip = "Smaller text under the main line, e.g. TRADING | EDUCATION. Leave empty to hide.", display = display.none)
 string secondFontInput = input.string(FONT_SYSTEM, "Font", options = [FONT_SYSTEM, FONT_MONO, FONT_SERIF, FONT_SERIF_ITALIC, FONT_SANS, FONT_SANS_ITALIC, FONT_SCRIPT, FONT_FRAKTUR, FONT_DOUBLE_STRUCK], group = groupSecond, display = display.none)
@@ -64,7 +64,7 @@ bool secondBoldInput = input.bool(false, "Bold", inline = "secondFormat", group 
 bool secondItalicInput = input.bool(false, "Italic", inline = "secondFormat", group = groupSecond, display = display.none)
 string secondLineInput = input.string(LINE_NONE, "Line", options = [LINE_NONE, LINE_UNDERLINE, LINE_STRIKETHROUGH], group = groupSecond, display = display.none)
 int secondSizeInput = input.int(12, "Size (pt)", minval = 6, maxval = 60, inline = "secondLook", group = groupSecond, display = display.none)
-color secondColorInput = input.color(color.new(#434651, 35), "Color", inline = "secondLook", group = groupSecond, display = display.none)
+color secondColorInput = input.color(color.new(#9CA3AF, 35), "Text color", inline = "secondLook", group = groupSecond, display = display.none)
 
 string positionInput = input.string(POS_TOP_RIGHT, "Location", options = [POS_TOP_CENTER, POS_TOP_LEFT, POS_TOP_RIGHT, POS_MIDDLE, POS_BOTTOM_CENTER, POS_BOTTOM_LEFT, POS_BOTTOM_RIGHT], group = groupPosition, display = display.none)
 float offsetInput = input.float(7.0, "Edge offset (% of height)", minval = 0, maxval = 40, step = 0.5, group = groupPosition, tooltip = "Moves the text away from the top (or bottom) edge so the floating drawing toolbar does not cover it. Increase it if the text is still hidden.", display = display.none)
